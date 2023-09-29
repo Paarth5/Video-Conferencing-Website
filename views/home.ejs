@@ -6,6 +6,13 @@
     <title>Video Conferencing Website</title>
   </head>
   <body>
-    <h1>Hello From Home</h1>
+    <h1>
+      Welcome <%= user?`${user.firstName} ${user.lastName}!`:'To Vroom!' %>
+    </h1>
+    <% if(!user){ %>
+    <a href="/login"><button>Login/Register</button></a>
+    <% } else{ %>
+    <a href="/logout"><button>Logout</button></a>
+    <% } %>
   </body>
 </html>

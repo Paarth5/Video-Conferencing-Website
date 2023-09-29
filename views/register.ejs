@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Sign-Up</h1>
+    <form action="/register" method="post">
+      <label for="user[firstName]">First-Name: </label>
+      <input
+        type="text"
+        name="user[firstName]"
+        id="user[firstName]"
+        placeholder="John"
+        required
+      />
+      <label for="user[lastName]">Last-Name: </label>
+      <input
+        type="text"
+        name="user[lastName]"
+        id="user[lastName]"
+        placeholder="Smith"
+        required
+      />
+      <label for="user[username]">Username: </label>
+      <input type="text" name="user[username]" id="user[username]" required />
+      <label for="user[password]">Password: </label>
+      <input
+        type="password"
+        name="user[password]"
+        id="user[password]"
+        required
+      />
+      <label for="user[age]">Age: </label>
+      <input type="number" name="user[age]" id="user[age]" />
+      <button>Register</button>
+    </form>
+    <p>Already a user ? <a href="/login">Login</a>.</p>
+  </body>
+</html>
