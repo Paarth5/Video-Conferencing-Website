@@ -1,5 +1,14 @@
+const PORT = process.env.PORT || 3000;
 const express = require("express");
 const app = express();
+const server = require("http").createServer(app);
+const cors = require("cors");
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
 const path = require("path");
 const methodOverride = require("method-override");
 const mongoose = require("mongoose");
@@ -7,8 +16,8 @@ const passport = require("passport");
 const localPassport = require("passport-local");
 const User = require("./models/users");
 const session = require("express-session");
-
-const PORT = process.env.PORT || 3000;
+const { v4 } = require("uuid");
+const { isLoggedIn } = require("./middleware");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -29,6 +38,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
 
 passport.use(new localPassport(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -81,7 +91,29 @@ app.get("/logout", (req, res) => {
     res.redirect("/home");
   });
 });
+app.get("/new", isLoggedIn, (req, res) => {
+  res.redirect(`/room/${v4()}`);
+});
+app.get("/join", isLoggedIn, (req, res) => {
+  res.render("join");
+});
+app.post("/join", isLoggedIn, (req, res) => {
+  const { id } = req.body;
+  res.redirect(`/room/${id}`);
+});
+app.get("/room/:id", isLoggedIn, (req, res) => {
+  const { id } = req.params;
+  const user = req.user;
+  res.render("room", { id, user });
+});
 
-app.listen(PORT, () => {
+// Socket.io wala part
+io.on("connection", function (socket) {
+  socket.on("join-room", (roomID, userID) => {
+    console.log("Room Id: ", roomID, " User Id: ", userID);
+  });
+});
+
+server.listen(PORT, () => {
   console.log(`Connected to server Port ${PORT} !!!`);
 });
