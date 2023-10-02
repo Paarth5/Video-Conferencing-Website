@@ -10,6 +10,7 @@
     <script defer>
       const roomId = "<%- id %>";
       const userId = "<%- user._id %>";
+      const userName = "<%- user.firstName %> <%- user.lastName%>";
       function copyText() {
         navigator.clipboard.writeText(`${roomId}`);
       }
