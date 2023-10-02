@@ -1,48 +1,54 @@
-const socket = io();
-const myPeer = new Peer(userID, {
-  host: "/",
-  port: 3001,
-});
-
-let s = 0;
-// Video wala part
+const socket = io("/");
 const videoGrid = document.querySelector(".videoGrid");
+const myPeer = new Peer(userId, {
+  host: "/",
+  port: "3001",
+});
 const myVideo = document.createElement("video");
-myVideo.classList.add("me");
 myVideo.muted = true;
+myVideo.classList.add("me");
+let myStream;
+const peers = {};
 navigator.mediaDevices
   .getUserMedia({
-    audio: true,
     video: true,
+    audio: true,
   })
   .then((stream) => {
-    s = stream;
+    myStream = stream;
     addVideoStream(myVideo, stream);
+    socket.on("user-connected", (userId) => {
+      console.log("User Connected ", userId);
+      connectToNewUser(userId, stream);
+    });
   });
-myPeer.on("open", () => {
-  socket.emit("join-room", roomID, userID);
-});
+  
 myPeer.on("call", (call) => {
-  call.answer(s);
-  const userVideo = document.createElement("video");
+  console.log("Stream Sent: ", myStream);
+  call.answer(myStream);
+  const video = document.createElement("video");
   call.on("stream", (userVideoStream) => {
-    addVideoStream(userVideo, userVideoStream);
+    addVideoStream(video, userVideoStream);
   });
 });
-socket.on("user-connected", (userID) => {
-  console.log("user Connected", userID);
-  connectToNewUser(userID, s);
+myPeer.on("open", () => {
+  socket.emit("join-room", roomId, userId);
+});
+socket.on("user-disconnected", (userId) => {
+  if (peers[userId]) peers[userId].close();
 });
 
 function connectToNewUser(userId, stream) {
   const call = myPeer.call(userId, stream);
-  const userVideo1 = document.createElement("video");
-  call.on("stream", (userVideoStream1) => {
-    addVideoStream(userVideo1, userVideoStream1);
+  const video = document.createElement("video");
+  call.on("stream", (userVideoStream) => {
+    addVideoStream(video, userVideoStream);
   });
   call.on("close", () => {
     video.remove();
   });
+
+  peers[userId] = call;
 }
 
 function addVideoStream(video, stream) {
