@@ -11,6 +11,7 @@
       const roomId = "<%- id %>";
       const userId = "<%- user._id %>";
       const userName = "<%- user.firstName %> <%- user.lastName%>";
+
       function copyText() {
         navigator.clipboard.writeText(`${roomId}`);
       }
@@ -22,6 +23,7 @@
     <script src="/socket.io/socket.io.js" defer></script>
     <script src="/index.js" defer></script>
     <link rel="stylesheet" href="/index.css" />
+
   </head>
   <body>
     <a href="/home"><button>Home</button></a>

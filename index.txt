@@ -4,6 +4,7 @@ const myPeer = new Peer(userId, {
   host: "/",
   port: "3001",
 });
+
 const container = document.createElement("div");
 const dispName = document.createElement("span");
 dispName.innerText = "You";
@@ -50,6 +51,7 @@ myPeer.on("open", () => {
 socket.on("user-disconnected", (userId) => {
   if (peers[userId]) peers[userId].close();
   if (containers[userId]) containers[userId].remove();
+
 });
 
 function connectToNewUser(userId, stream) {
@@ -74,10 +76,12 @@ function connectToNewUser(userId, stream) {
 }
 
 function addVideoStream(video, stream, container) {
+
   video.srcObject = stream;
   video.addEventListener("loadedmetadata", () => {
     video.play();
   });
   container.append(video);
   videoGrid.append(container);
+
 }

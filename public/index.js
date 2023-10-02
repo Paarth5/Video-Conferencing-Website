@@ -13,6 +13,7 @@ myVideo.muted = true;
 myVideo.classList.add("me");
 const peers = {};
 const containers = {};
+
 navigator.mediaDevices
   .getUserMedia({
     video: true,
@@ -22,6 +23,7 @@ navigator.mediaDevices
     addVideoStream(myVideo, stream, container);
     socket.on("user-connected", (userId, userName) => {
       connectToNewUser(userId, stream, userName);
+
     });
   });
 
@@ -41,6 +43,7 @@ myPeer.on("call", (call) => {
   const video = document.createElement("video");
   call.on("stream", (userVideoStream) => {
     addVideoStream(video, userVideoStream, container);
+
   });
 });
 
@@ -74,6 +77,7 @@ function connectToNewUser(userId, stream, newUserName) {
 }
 
 function addVideoStream(video, stream, container) {
+
   video.srcObject = stream;
   video.addEventListener("loadedmetadata", () => {
     video.play();
