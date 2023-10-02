@@ -4,17 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="shortcut icon" href="#" />
 
     <!-- Copy Link Functionality -->
     <script defer>
-      const roomID = "<%- id %>";
-      const userID = "<%- user._id %>";
+      const roomId = "<%- id %>";
+      const userId = "<%- user._id %>";
       function copyText() {
-        navigator.clipboard.writeText(`${roomID}`);
+        navigator.clipboard.writeText(`${roomId}`);
       }
     </script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/index.js"></script>
+    <script src="/simple-peer/simplepeer.min.js" defer>
+      console.log("hello")
+    </script>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="/index.js" defer></script>
 
     <style>
       .videoGrid {
@@ -26,6 +30,9 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+      }
+      .me {
+        border: 5px solid green;
       }
     </style>
   </head>

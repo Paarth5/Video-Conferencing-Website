@@ -108,9 +108,10 @@ app.get("/room/:id", isLoggedIn, (req, res) => {
 });
 
 // Socket.io wala part
-io.on("connection", function (socket) {
-  socket.on("join-room", (roomID, userID) => {
-    console.log("Room Id: ", roomID, " User Id: ", userID);
+io.on("connection", (socket) => {
+  socket.on("join-room", (roomId, userId) => {
+    socket.join(roomId);
+    socket.broadcast.to(roomId).emit("user-connected", userId);
   });
 });
 
