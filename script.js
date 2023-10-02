@@ -109,9 +109,10 @@ app.get("/room/:id", isLoggedIn, (req, res) => {
 
 // Socket.io wala part
 io.on("connection", (socket) => {
-  socket.on("join-room", (roomId, userId) => {
+  socket.on("join-room", (roomId, userId, userName) => {
     socket.join(roomId);
-    socket.broadcast.to(roomId).emit("user-connected", userId);
+    socket.broadcast.to(roomId).emit("user-connected", userId, userName);
+
     socket.on("disconnect", () => {
       socket.broadcast.to(roomId).emit("user-disconnected", userId);
     });
