@@ -20,8 +20,8 @@ navigator.mediaDevices
   })
   .then((stream) => {
     addVideoStream(myVideo, stream, container);
-    socket.on("user-connected", (userId) => {
-      connectToNewUser(userId, stream);
+    socket.on("user-connected", (userId, userName) => {
+      connectToNewUser(userId, stream, userName);
     });
   });
 
@@ -36,7 +36,7 @@ myPeer.on("call", (call) => {
     });
   const container = document.createElement("div");
   const dispName = document.createElement("span");
-  dispName.innerText = "User";
+  dispName.innerText = `${call.metadata.userName}`;
   container.append(dispName);
   const video = document.createElement("video");
   call.on("stream", (userVideoStream) => {
@@ -45,19 +45,19 @@ myPeer.on("call", (call) => {
 });
 
 myPeer.on("open", () => {
-  socket.emit("join-room", roomId, userId);
+  socket.emit("join-room", roomId, userId, userName);
 });
 socket.on("user-disconnected", (userId) => {
   if (peers[userId]) peers[userId].close();
   if (containers[userId]) containers[userId].remove();
 });
 
-function connectToNewUser(userId, stream) {
-  const call = myPeer.call(userId, stream);
+function connectToNewUser(userId, stream, newUserName) {
+  const call = myPeer.call(userId, stream, { metadata: { userName } });
   const video = document.createElement("video");
   const container = document.createElement("div");
   const dispName = document.createElement("span");
-  dispName.innerText = "User";
+  dispName.innerText = `${newUserName}`;
   container.append(dispName);
 
   call.on("stream", (userVideoStream) => {
