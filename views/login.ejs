@@ -1,20 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/index.css" />
-  </head>
+  <%- include('partials/header') %>
   <body>
-    <h1>Login To Vroom</h1>
-    <form action="/login" method="POST">
-      <label for="username">Username: </label>
-      <input type="text" name="username" id="username" />
-      <label for="password">Password: </label>
-      <input type="password" name="password" id="password" />
-      <button>Login</button>
-    </form>
-    <p>New To Vroom? <a href="/register">Register</a>.</p>
+    <h1 class="form-head">Login To ChatFusion</h1>
+    <div class="container">
+      <form
+        action="/login"
+        class="needs-validation form"
+        method="POST"
+        novalidate
+      >
+        <div class="form-cont">
+          <div class="col-md-6 form-feild">
+            <label id="validationCustom01">Username: </label>
+            <input
+              type="text"
+              name="username"
+              id="validationCustom01"
+              class="form-control"
+              required
+            />
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please Enter Username!</div>
+          </div>
+          <div class="col-md-6 form-feild">
+            <label id="validationCustom02">Password: </label>
+            <input
+              type="password"
+              name="password"
+              id="validationCustom02"
+              class="form-control"
+              required
+            />
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please Enter Password!</div>
+          </div>
+        </div>
+        <div class="login-form-submit-cont">
+          <p>New To Vroom? <a href="/register">Register</a>.</p>
+          <button class="btn btn-success">Login</button>
+        </div>
+      </form>
+    </div>
+    <%- include('partials/footer') %>
+    <script>
+      (() => {
+        "use strict";
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll(".needs-validation");
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+    </script>
   </body>
 </html>

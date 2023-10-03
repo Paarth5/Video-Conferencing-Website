@@ -1,43 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/index.css" />
-  </head>
+  <%- include('partials/header') %>
   <body>
-    <h1>Sign-Up</h1>
-    <form action="/register" method="post">
-      <label for="user[firstName]">First-Name: </label>
-      <input
-        type="text"
-        name="user[firstName]"
-        id="user[firstName]"
-        placeholder="John"
-        required
-      />
-      <label for="user[lastName]">Last-Name: </label>
-      <input
-        type="text"
-        name="user[lastName]"
-        id="user[lastName]"
-        placeholder="Smith"
-        required
-      />
-      <label for="user[username]">Username: </label>
-      <input type="text" name="user[username]" id="user[username]" required />
-      <label for="user[password]">Password: </label>
-      <input
-        type="password"
-        name="user[password]"
-        id="user[password]"
-        required
-      />
-      <label for="user[age]">Age: </label>
-      <input type="number" name="user[age]" id="user[age]" />
-      <button>Register</button>
-    </form>
-    <p>Already a user ? <a href="/login">Login</a>.</p>
+    <h1 class="form-head">Sign-Up To ChatFusion</h1>
+    <div class="container">
+      <form
+        action="/register"
+        method="post"
+        class="needs-validation form"
+        novalidate
+      >
+        <div class="row justify-content-center">
+          <div class="col-4 form-feild">
+            <label id="validationCustom01" class="form-label"
+              >First-Name:
+            </label>
+            <input
+              type="text"
+              name="user[firstName]"
+              id="validationCustom01"
+              placeholder="John"
+              class="form-control"
+              required
+            />
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please Enter First Name!</div>
+          </div>
+          <div class="col-4 form-feild">
+            <label id="validationCustom02" class="form-label"
+              >Last-Name:
+            </label>
+            <input
+              type="text"
+              name="user[lastName]"
+              id="validationCustom02"
+              placeholder="Smith"
+              class="form-control"
+              required
+            />
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please Enter Last Name!</div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-3 form-feild">
+            <label id="validationCustom03" class="form-label">Username: </label>
+            <input
+              type="text"
+              name="user[username]"
+              id="validationCustom03"
+              class="form-control"
+              required
+            />
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please Enter Username!</div>
+          </div>
+          <div class="col-md-3 form-feild">
+            <label id="validationCustom04" class="form-label">Password: </label>
+            <input
+              type="password"
+              name="user[password]"
+              class="form-control"
+              id="validationCustom04"
+              required
+            />
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please Enter Password!</div>
+          </div>
+          <div class="col-md-2 form-feild">
+            <label id="validationCustom05" class="form-label">Age: </label>
+            <input
+              type="number"
+              name="user[age]"
+              id="validationCustom05"
+              class="form-control"
+              min="18"
+              required
+            />
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Must be atleast 18.</div>
+          </div>
+        </div>
+        <div class="register-form-submit-cont">
+          <p>Already a user ? <a href="/login">Login</a>.</p>
+          <button class="btn btn-success">Register</button>
+        </div>
+      </form>
+    </div>
+    <script>
+      (() => {
+        "use strict";
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll(".needs-validation");
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+    </script>
+    <%- include('partials/footer') %>
   </body>
 </html>

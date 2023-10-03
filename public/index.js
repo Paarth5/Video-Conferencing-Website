@@ -9,6 +9,9 @@ const dispName = document.createElement("span");
 dispName.innerText = "You";
 container.append(dispName);
 const myVideo = document.createElement("video");
+container.classList.add("videoContainer");
+dispName.classList.add("dispName");
+myVideo.classList.add("videoStream");
 myVideo.muted = true;
 myVideo.classList.add("me");
 const peers = {};
@@ -23,7 +26,6 @@ navigator.mediaDevices
     addVideoStream(myVideo, stream, container);
     socket.on("user-connected", (userId, userName) => {
       connectToNewUser(userId, stream, userName);
-
     });
   });
 
@@ -41,9 +43,11 @@ myPeer.on("call", (call) => {
   dispName.innerText = `${call.metadata.userName}`;
   container.append(dispName);
   const video = document.createElement("video");
+  container.classList.add("videoContainer");
+  dispName.classList.add("dispName");
+  video.classList.add("videoStream");
   call.on("stream", (userVideoStream) => {
     addVideoStream(video, userVideoStream, container);
-
   });
 });
 
@@ -60,6 +64,9 @@ function connectToNewUser(userId, stream, newUserName) {
   const video = document.createElement("video");
   const container = document.createElement("div");
   const dispName = document.createElement("span");
+  container.classList.add("videoContainer");
+  dispName.classList.add("dispName");
+  video.classList.add("videoStream");
   dispName.innerText = `${newUserName}`;
   container.append(dispName);
 
@@ -77,7 +84,6 @@ function connectToNewUser(userId, stream, newUserName) {
 }
 
 function addVideoStream(video, stream, container) {
-
   video.srcObject = stream;
   video.addEventListener("loadedmetadata", () => {
     video.play();

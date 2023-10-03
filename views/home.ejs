@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Video Conferencing Website</title>
-    <link rel="stylesheet" href="/index.css" />
-  </head>
+  <%- include('partials/header') %>
   <body>
-    <h1>
-      Welcome <%= user?`${user.firstName} ${user.lastName}!`:'To Vroom!' %>
+    <div class="home-container"></div>
+    <%- include('partials/navbar') %>
+    <h1 class="home-head">
+      Welcome <%= user?`${user.firstName} ${user.lastName}!`:'To ChatFusion!' %>
     </h1>
-    <% if(!user){ %>
-    <a href="/login"><button>Login/Register</button></a>
-    <% } else{ %>
-    <a href="/logout"><button>Logout</button></a>
-    <% } %>
-    <hr />
-    <a href="/new"><button>Create New Room</button></a>
-    <a href="/join"><button>Join Room</button></a>
+    <div class="home-btn-container container">
+      <a href="/new"><button class="home-btn btn">Create New Room</button></a>
+      <a href="/join"><button class="home-btn btn">Join Room</button></a>
+    </div>
+
+    <%- include('partials/footer') %>
   </body>
 </html>
