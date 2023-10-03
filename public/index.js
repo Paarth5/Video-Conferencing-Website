@@ -49,6 +49,11 @@ myPeer.on("call", (call) => {
   call.on("stream", (userVideoStream) => {
     addVideoStream(video, userVideoStream, container);
   });
+  call.on("close", () => {
+    video.remove();
+    dispName.remove();
+    container.remove();
+  });
 });
 
 myPeer.on("open", () => {

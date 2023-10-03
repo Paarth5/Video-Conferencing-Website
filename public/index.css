@@ -145,7 +145,7 @@ footer {
 /* ***************** */
 
 .end-btn {
-  position: fixed;
+  position: relative;
   top: 20px;
   left: 20px;
 }
@@ -193,7 +193,7 @@ video {
   align-items: center;
   width: fit-content;
   background-color: #292a29;
-  margin: 20px auto;
+  margin: 0px auto 20px;
 }
 .meeting-id {
   margin: 0 30px 0 0;
