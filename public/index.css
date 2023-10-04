@@ -64,7 +64,9 @@ footer {
 .navbar-toggler-icon {
   background-color: rgb(209, 209, 209);
 }
-
+.navbar-toggler {
+  margin-right: 30px;
+}
 /* ***************** */
 /* Home */
 /* ***************** */
@@ -154,11 +156,7 @@ footer {
   grid-template-columns: repeat(auto-fill, 340px);
   grid-auto-rows: 340px;
 }
-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+
 .dispName {
   position: fixed;
   background-color: #7b7b7b;
@@ -169,6 +167,9 @@ video {
   display: none;
 }
 .videoStream {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 20px;
 }
 .videoContainer {
@@ -201,4 +202,135 @@ video {
 }
 .copy-btn {
   border-radius: 50%;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media screen and (max-width: 1024px) {
+  .home-btn-container {
+    padding-top: 10px;
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 750px) {
+  .home-btn {
+    height: 200px;
+    width: 300px;
+  }
+  .footer {
+    flex-direction: column;
+  }
+  .footer-logo {
+    margin: 0px;
+  }
+  .login-link {
+    font-size: 15px;
+    text-align: center;
+  }
+  .row {
+    flex-direction: column;
+  }
+  .reg-feild {
+    width: 75%;
+    margin: auto;
+    margin-bottom: 20px;
+  }
+  .login-form-submit-cont {
+    flex-direction: column-reverse;
+    padding: 0%;
+    align-items: center;
+  }
+  .login-btn {
+    width: 100px;
+    margin-bottom: 20px;
+  }
+  .form {
+    margin: 20px 0;
+  }
+}
+@media screen and (max-width: 650px) {
+  .meeting-id-cont {
+    margin-top: 50px;
+  }
+  .dispName,
+  .videoStream {
+    margin: 0 25%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .join-input {
+    margin: 0;
+  }
+  .dispName,
+  .videoStream {
+    margin: 0 20%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .home-btn {
+    height: 200px;
+    width: 300px;
+  }
+  .home-head {
+    font-size: 30px;
+  }
+
+  .login-btn {
+    width: 75%;
+  }
+  .form {
+    margin: 20px;
+    padding: 20px;
+  }
+  .join-form-cont {
+    flex-direction: column;
+  }
+  .join-btn {
+    margin: 20px 0 0 0;
+  }
+  .join-input {
+    width: 75%;
+  }
+  .join-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .videoContainer {
+    margin: 10px;
+  }
+  .dispName {
+    width: 90%;
+  }
+  .videoStream {
+    width: 90%;
+    height: 90%;
+  }
+  .dispName,
+  .videoStream {
+    margin: 0 10%;
+  }
+}
+@media screen and (max-width: 300px) {
+  .home-btn {
+    height: 200px;
+    width: 200px;
+  }
+  .home-head {
+    font-size: 30px;
+  }
+  .footer-slogan {
+    font-size: 12px;
+    margin: 10px 0 0 0;
+  }
+  .navbar-toggler {
+    margin: 0;
+  }
+  .form-head {
+    font-size: 30px;
+  }
+  .dispName,
+  .videoStream {
+    margin: 0;
+  }
 }
