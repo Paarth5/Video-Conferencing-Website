@@ -1,4 +1,5 @@
-const PORT = process.env.PORT || 3000;
+require("dotenv").config();
+const PORT = process.env.PROD_PORT || 3000;
 const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
@@ -44,8 +45,9 @@ passport.use(new localPassport(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@chatfusion.mfpslnx.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp`;
 mongoose
-  .connect("mongodb://127.0.0.1:27017/users")
+  .connect(uri)
   .then(() => {
     console.log("Connected to MongoDB!!");
   })
