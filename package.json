@@ -14,5 +14,16 @@
     "peerjs": "^1.5.1",
     "socket.io": "^4.7.2",
     "uuid": "^9.0.1"
-  }
+  },
+  "name": "video-conferencing-website",
+  "version": "1.0.0",
+  "main": "middleware.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node script.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
