@@ -17,7 +17,7 @@ const localPassport = require("passport-local");
 const User = require("./models/users");
 const session = require("express-session");
 const { v4 } = require("uuid");
-const { isLoggedIn } = require("./middleware");
+const { isLoggedIn, storeReturnTo } = require("./middleware");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -63,14 +63,17 @@ app.get("/login", (req, res) => {
 });
 app.post(
   "/login",
+  storeReturnTo,
   passport.authenticate("local", {
     failureFlash: false,
     failureRedirect: "/login",
   }),
   (req, res) => {
-    res.redirect("/home");
+    redirectUrl = res.locals.returnTo || "/home";
+    res.redirect(redirectUrl);
   }
 );
+
 app.get("/register", (req, res) => {
   res.render("register");
 });

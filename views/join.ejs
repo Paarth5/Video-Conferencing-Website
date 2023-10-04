@@ -2,6 +2,8 @@
 <html lang="en">
   <%- include('partials/header') %>
   <body>
+    <a href="/home"><button class="btn btn-dark end-btn">Cancel</button></a>
+
     <h1 class="form-head">Join Meeting</h1>
     <div class="container">
       <div class="container">
@@ -12,15 +14,17 @@
           novalidate
         >
           <div class="join-form-cont">
-            <label id="validationCustom01" class="form-label"
-              >Meeting id:
-            </label>
-            <input
-              type="text"
-              name="id"
-              id="validationCustom01"
-              class="join-input"
-            />
+            <div class="join-container">
+              <label id="validationCustom01" class="form-label"
+                >Meeting id:
+              </label>
+              <input
+                type="text"
+                name="id"
+                id="validationCustom01"
+                class="join-input"
+              />
+            </div>
             <button class="btn btn-success join-btn">Join</button>
           </div>
         </form>
