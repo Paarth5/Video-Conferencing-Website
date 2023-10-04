@@ -17,6 +17,7 @@ const passport = require("passport");
 const localPassport = require("passport-local");
 const User = require("./models/users");
 const session = require("express-session");
+const MemoryStore = require("memorystore")(session);
 const { v4 } = require("uuid");
 const { isLoggedIn, storeReturnTo } = require("./middleware");
 
@@ -31,6 +32,9 @@ const sessionConfig = {
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
+  store: new MemoryStore({
+    checkPeriod: 86400000, // prune expired entries every 24h
+  }),
 };
 
 app.use(session(sessionConfig));
