@@ -2,6 +2,7 @@
 <html lang="en">
   <%- include('partials/header') %>
   <body>
+    <a href="/home"><button class="btn btn-dark end-btn">Cancel</button></a>
     <h1 class="form-head">Login To ChatFusion</h1>
     <div class="container">
       <form
@@ -37,8 +38,10 @@
           </div>
         </div>
         <div class="login-form-submit-cont">
-          <p>New To Vroom? <a href="/register">Register</a>.</p>
-          <button class="btn btn-success">Login</button>
+          <p class="login-link">
+            New To Vroom? <a href="/register">Register</a>.
+          </p>
+          <button class="btn btn-success login-btn">Login</button>
         </div>
       </form>
     </div>
