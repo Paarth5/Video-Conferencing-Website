@@ -20,7 +20,8 @@
   "main": "middleware.js",
   "devDependencies": {},
   "scripts": {
-    "start": "node script.js"
+    "start": "node script.js",
+    "peerstart": "peerjs --port 3001"
   },
   "keywords": [],
   "author": "",
