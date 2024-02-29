@@ -19,7 +19,7 @@
   },
   "name": "video-conferencing-website",
   "version": "1.0.0",
-  "main": "middleware.js",
+  "main": "script.js",
   "scripts": {
     "start": "node script.js",
     "peerstart": "peerjs --port 3001"
